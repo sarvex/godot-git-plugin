@@ -51,8 +51,10 @@ env.Append(LIBPATH=["../thirdparty/bin/"])
 env.Prepend(LIBS=["git2", "ssh2"])
 
 library = env.SharedLibrary(
-    target=env["target_path"] +
-    "{}{}{}".format(env["target_name"], env["suffix"], env["SHLIBSUFFIX"]),
-    source=Glob("src/*.cpp")
+    target=(
+        env["target_path"]
+        + f'{env["target_name"]}{env["suffix"]}{env["SHLIBSUFFIX"]}'
+    ),
+    source=Glob("src/*.cpp"),
 )
 Default(library)
